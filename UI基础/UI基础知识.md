@@ -61,7 +61,9 @@
 ```objc
 #import "NSObject+Extension.h"
 #import <objc/runtime.h>
+
 static const void *SpecialNameKey = &SpecialNameKey;
+
 @implementation NSObject (SpecialName)
 @dynamic specialName;
 
