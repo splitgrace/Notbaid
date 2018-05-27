@@ -78,5 +78,52 @@ static const void *SpecialNameKey = &SpecialNameKey;
 ```
 
 ### 二、类扩展（Extension）
+#### 1.适用范围
+- 扩展是分类的一种特殊形式
+- 也称为匿名分类
 
+#### 2. 语法格式
 
+```objc
+@interface 主类类名 ()
+@end
+// 扩展通常定义在主类 .m 文件中，扩展中声明的方法直接在主类 .m 文件中实现
+```
+
+#### 3. 注意事项
+- 扩展中可以声明实例变量，可以声明属性
+- 因为扩展通常定义在主类的 `.m` 文件中，所以扩展声明的方法和属性通常是私有的
+
+#### 4. 分类和扩展的区别
+- 分类不可以声明实例变量，通常是公开的，文件名是：`主类名+分类名.h`
+- 扩展是可以声明实例变量，是私有的，文件名是：`主类名_扩展标识.h`，在主类的 `.m` 文件中 `#import` 该头文件
+
+#### 5. 使用方法
+- 方式一：以单独的文件定义 `QLViewController_ExtensionController.h` 文件
+
+```objc
+#import "QLViewController.h"
+
+@interface QLViewController ()
+@property (nonaomic, copy) NSString *stringExtension;
+- (void)testExtension;
+@end
+```
+
+- 方式二：在主类的 `.m` 文件中定义 `QLViewController.m`文件，此种最常用
+
+```objc
+#import "QLViewController.h"
+
+@interface QLViewController ()
+@property (nonatomic, copy) NSString *stringExtension;
+- (void)testExtension;
+@end
+
+@implementation QLViewController
+- (void)testExtension {
+	self.stringExtension = @"字符串";
+	NSLog(@"定义的属性String是:%@", self.stringExtension);
+}
+@end
+```
